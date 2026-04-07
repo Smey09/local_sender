@@ -78,13 +78,13 @@ jobs:
         run: flutter build windows --release
 
       - name: Rename EXE
-        run: mv build/windows/runner/Release/local_sender.exe build/windows/runner/Release/Local-Sender-${{ github.ref_name }}.exe
+        run: mv build/windows/x64/Release/runner/local_sender.exe build/windows/x64/Release/runner/Local-Sender-${{ github.ref_name }}.exe
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
         with:
           name: exe
-          path: build/windows/runner/Release/Local-Sender-${{ github.ref_name }}.exe
+          path: build/windows/x64/Release/runner/Local-Sender-${{ github.ref_name }}.exe
 
   build-linux:
     runs-on: ubuntu-latest
