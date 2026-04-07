@@ -77,10 +77,8 @@ jobs:
       - name: Build Windows app
         run: flutter build windows --release
 
-      - name: Create EXE installer
-        run: |
-          choco install innosetup
-          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /O"build\windows\runner\Release" /F"Local-Sender-${{ github.ref_name }}" /DSourceDir="build\windows\runner\Release" installer.iss
+      - name: Rename EXE
+        run: mv build/windows/runner/Release/local_sender.exe build/windows/runner/Release/Local-Sender-${{ github.ref_name }}.exe
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
