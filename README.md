@@ -25,10 +25,6 @@ Local Sender is a Flutter app for discovering nearby devices and managing file t
 2. Run `flutter pub get`
 3. Launch the app with `flutter run`
 
-## Screenshot
-
-![Local Sender screenshot](assets/demo/LocalSend.png)
-
 ## Notes
 
 - The app uses `get` for state management and routing
