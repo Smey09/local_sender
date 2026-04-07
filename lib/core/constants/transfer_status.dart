@@ -1,0 +1,1 @@
+enum TransferStatus { pending, inProgress, completed, failed, cancelled }

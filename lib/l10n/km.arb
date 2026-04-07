@@ -1,0 +1,22 @@
+{
+  "appName": "Local Sender",
+  "home": "ទំព័រដើម",
+  "transfer": "ផ្ទេរ",
+  "settings": "ការកំណត់",
+  "discoverDevices": "រកឃើញឧបករណ៍",
+  "noDevicesFound": "រកមិនឃើញឧបករណ៍",
+  "tapSearchToDiscover": "ចុចប៊ូតុងស្វែងរកដើម្បីរកឃើញឧបករណ៍",
+  "receivingFile": "កំពុងទទួលឯកសារ...",
+  "fileReceived": "ទទួលឯកសារបានជោគជ័យ!",
+  "close": "បិទ",
+  "theme": "រូបរាង",
+  "lightDarkMode": "របៀបពន្លឺ/ងងឹត",
+  "about": "អំពី",
+  "version": "កំណែ",
+  "confirm": "បញ្ជាក់",
+  "cancel": "បោះបង់",
+  "ok": "យល់ព្រម",
+  "error": "កំហុស",
+  "success": "ជោគជ័យ",
+  "info": "ព័ត៌មាន"
+}

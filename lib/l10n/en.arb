@@ -1,0 +1,22 @@
+{
+  "appName": "Local Sender",
+  "home": "Home",
+  "transfer": "Transfer",
+  "settings": "Settings",
+  "discoverDevices": "Discover Devices",
+  "noDevicesFound": "No devices found",
+  "tapSearchToDiscover": "Tap the search button to discover devices",
+  "receivingFile": "Receiving file...",
+  "fileReceived": "File received successfully!",
+  "close": "Close",
+  "theme": "Theme",
+  "lightDarkMode": "Light/Dark mode",
+  "about": "About",
+  "version": "Version",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "ok": "OK",
+  "error": "Error",
+  "success": "Success",
+  "info": "Info"
+}
