@@ -77,14 +77,24 @@ jobs:
       - name: Build Windows app
         run: flutter build windows --release
 
-      - name: Rename EXE
-        run: mv build/windows/x64/Release/runner/local_sender.exe build/windows/x64/Release/runner/Local-Sender-${{ github.ref_name }}.exe
+      - name: Find and rename Windows EXE
+        shell: pwsh
+        run: |
+          $exe = Get-ChildItem -Path build/windows -Filter *.exe -Recurse | Where-Object { $_.Name -match 'local_sender|local-sender|local_sender\.exe' } | Select-Object -First 1
+          if (-not $exe) {
+            Write-Host "Contents of build/windows:" 
+            Get-ChildItem -Path build/windows -Recurse | ForEach-Object { Write-Host $_.FullName }
+            throw "Windows EXE not found in build/windows"
+          }
+          $destination = Join-Path $exe.DirectoryName "Local-Sender-${{ github.ref_name }}.exe"
+          Rename-Item -Path $exe.FullName -NewName $destination
+          Write-Host "Renamed $($exe.FullName) to $destination"
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
         with:
           name: exe
-          path: build/windows/x64/Release/runner/Local-Sender-${{ github.ref_name }}.exe
+          path: build/windows/**/Local-Sender-${{ github.ref_name }}.exe
 
   build-linux:
     runs-on: ubuntu-latest
