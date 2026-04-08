@@ -96,39 +96,39 @@ jobs:
           name: exe
           path: build/windows/**/Local-Sender-${{ github.ref_name }}.exe
 
-  build-linux:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  # build-linux:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+  #     - name: Set up Flutter
+  #       uses: subosito/flutter-action@v2
 
-      - name: Enable Linux desktop
-        run: flutter config --enable-linux-desktop
+  #     - name: Enable Linux desktop
+  #       run: flutter config --enable-linux-desktop
 
-      - name: Install Linux dependencies
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
+  #     - name: Install Linux dependencies
+  #       run: |
+  #         sudo apt-get update -y
+  #         sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
 
-      - name: Get dependencies
-        run: flutter pub get
+  #     - name: Get dependencies
+  #       run: flutter pub get
 
-      - name: Build Linux app
-        run: flutter build linux --release
+  #     - name: Build Linux app
+  #       run: flutter build linux --release
 
-      - name: Create Linux zip
-        run: |
-          cd build/linux/x64/release/bundle
-          zip -r ../../../../Local-Sender-${{ github.ref_name }}-linux.zip .
+  #     - name: Create Linux zip
+  #       run: |
+  #         cd build/linux/x64/release/bundle
+  #         zip -r ../../../../Local-Sender-${{ github.ref_name }}-linux.zip .
 
-      - name: Upload Linux artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux
-          path: Local-Sender-${{ github.ref_name }}-linux.zip
+  #     - name: Upload Linux artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: linux
+  #         path: Local-Sender-${{ github.ref_name }}-linux.zip
 
   build-web:
     runs-on: ubuntu-latest
@@ -157,7 +157,7 @@ jobs:
           path: Local-Sender-${{ github.ref_name }}-web.zip
 
   release:
-    needs: [build-android, build-macos, build-windows, build-linux, build-web]
+    needs: [build-android, build-macos, build-windows, build-web]
     runs-on: ubuntu-latest
     steps:
       - name: Download APK
@@ -175,10 +175,10 @@ jobs:
         with:
           name: exe
 
-      - name: Download Linux
-        uses: actions/download-artifact@v4
-        with:
-          name: linux
+      # - name: Download Linux
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: linux
 
       - name: Download Web
         uses: actions/download-artifact@v4
@@ -192,7 +192,6 @@ jobs:
             app-release.apk
             Local-Sender-${{ github.ref_name }}.dmg
             Local-Sender-${{ github.ref_name }}.exe
-            Local-Sender-${{ github.ref_name }}-linux.zip
             Local-Sender-${{ github.ref_name }}-web.zip
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
