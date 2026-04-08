@@ -130,34 +130,34 @@ jobs:
   #         name: linux
   #         path: Local-Sender-${{ github.ref_name }}-linux.zip
 
-  build-web:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  # build-web:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+  #     - name: Set up Flutter
+  #       uses: subosito/flutter-action@v2
 
-      - name: Get dependencies
-        run: flutter pub get
+  #     - name: Get dependencies
+  #       run: flutter pub get
 
-      - name: Build web app
-        run: flutter build web --release
+  #     - name: Build web app
+  #       run: flutter build web --release
 
-      - name: Create web zip
-        run: |
-          cd build/web
-          zip -r ../../../Local-Sender-${{ github.ref_name }}-web.zip .
+  #     - name: Create web zip
+  #       run: |
+  #         cd build/web
+  #         zip -r ../../../Local-Sender-${{ github.ref_name }}-web.zip .
 
-      - name: Upload web artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: web
-          path: Local-Sender-${{ github.ref_name }}-web.zip
+  #     - name: Upload web artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: web
+  #         path: Local-Sender-${{ github.ref_name }}-web.zip
 
   release:
-    needs: [build-android, build-macos, build-windows, build-web]
+    needs: [build-android, build-macos, build-windows]
     runs-on: ubuntu-latest
     steps:
       - name: Download APK
@@ -180,10 +180,10 @@ jobs:
       #   with:
       #     name: linux
 
-      - name: Download Web
-        uses: actions/download-artifact@v4
-        with:
-          name: web
+      # - name: Download Web
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: web
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -192,7 +192,6 @@ jobs:
             app-release.apk
             Local-Sender-${{ github.ref_name }}.dmg
             Local-Sender-${{ github.ref_name }}.exe
-            Local-Sender-${{ github.ref_name }}-web.zip
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           draft: false
